@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+dave:
+  name: Dave Thomas 
+  address: 20 Broadway Blvd.
+  email: dave@example.org
+  pay_type: Check
+
+erica:
+  name: Erica Prosacco
+  address: 30 California street, LA
+  email: erica.prosacco@stehrkulas.co
+  pay_type: Credit card
+
+cameron:
+  name: Cameron Streigh
+  address: 101 El Camino Real , Cupertino
+  email: cameron.streich@ortiz.com
+  pay_type: Purchase order 
