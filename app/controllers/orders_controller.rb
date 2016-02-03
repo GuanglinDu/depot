@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   include CurrentCart
+
   skip_before_action :authorize, only: [:new, :create]
   before_action :set_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -41,11 +42,16 @@ class OrdersController < ApplicationController
         session[:cart_id] = nil
 
         format.html { redirect_to store_url, notice: I18n.t('.thanks') }
-        #format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @order }
+        #format.html { redirect_to @order,
+        #               notice: 'Order was successfully created.' }
+        format.json {
+          render action: 'show', status: :created, location: @order
+        }
       else
         format.html { render action: 'new' }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.json {
+          render json: @order.errors, status: :unprocessable_entity
+        }
       end
     end
   end
@@ -55,11 +61,15 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html {
+          redirect_to @order, notice: 'Order was successfully updated.'
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.json {
+          render json: @order.errors, status: :unprocessable_entity
+        }
       end
     end
   end
@@ -75,13 +85,15 @@ class OrdersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_order
-      @order = Order.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def order_params
-      params.require(:order).permit(:name, :address, :email, :pay_type)
-    end
+  # Use callbacks to share common setup or constraints between actions
+  def set_order
+    @order = Order.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
+  def order_params
+    params.require(:order).permit(:name, :address, :email, :pay_type)
+  end
 end

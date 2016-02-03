@@ -1,5 +1,6 @@
 Depot::Application.routes.draw do
-  # The priority is based upon order of creation: first created -> highest priority.
+  # The priority is based upon order of creation:
+  #   first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   get 'admin' => 'admin#index'
 
@@ -19,8 +20,7 @@ Depot::Application.routes.draw do
   end
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  # i18n
+  # root 'welcome#index'. i18n enabled.
   scope '(:locale)' do
     resources :orders
     resources :line_items

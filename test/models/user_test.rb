@@ -34,7 +34,7 @@ class UserTest < ActiveSupport::TestCase
     assert bret.save, "Should be saved successfully"
   end
 
-  # OPTIMIZE: The 72-char length constraint seems unworkable 
+  # FIXME: The 72-char length constraint seems unworkable 
   # BCrypt actually uses the first 72 bytes in password
   # https://github.com/rails/rails/issues/22617
   test "password should be less than or equal to 72 chars" do

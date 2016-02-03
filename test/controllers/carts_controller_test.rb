@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class CartsControllerTest < ActionController::TestCase
+
   setup do
-    @cart = carts(:one)
+    @cart = carts(:one) # 2 carts in the fixture
   end
 
   test "should get index" do
@@ -40,12 +41,16 @@ class CartsControllerTest < ActionController::TestCase
   end
 
   test "should destroy cart" do
+    assert_equal 2, Cart.count, "There should be 2 carts in the fixture"
+
+    session[:cart_id] = @cart.id
+    assert_same @cart.id, session[:cart_id], "Should be the same"
+
+    # FIXME: why failed?
     assert_difference('Cart.count', -1) do
-      session[:cart_id] = @cart.id
-      delete :destroy, id: @cart
+      delete :destroy, id: @cart.id
     end
 
-    assert_redirected_to store_path
+    assert_redirected_to carts_path
   end
 end
-

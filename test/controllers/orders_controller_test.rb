@@ -2,7 +2,7 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
   setup do
-    @order = orders(:one)
+    @order = orders(:dave)
   end
 
   test "should get index" do
@@ -30,7 +30,10 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "should create order" do
     assert_difference('Order.count') do
-      post :create, order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type }
+      post :create, order: { address: @order.address,
+                             email: @order.email,
+                             name: @order.name,
+                             pay_type: @order.pay_type }
     end
 
     #assert_redirected_to order_path(assigns(:order))
@@ -48,8 +51,14 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should update order" do
-    patch :update, id: @order, order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type }
-    assert_redirected_to order_path(assigns(:order))
+    assert_not_nil @order.id, "Should not be nil"
+    assert assigns(:order), "Should be assigned"
+
+    patch :update, id: @order, order: { address: @order.address,
+                                        email: @order.email,
+                                        name: @order.name,
+                                        pay_type: @order.pay_type }
+    assert_redirected_to order_path(@order)
   end
 
   test "should destroy order" do
