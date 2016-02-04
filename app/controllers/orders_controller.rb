@@ -61,9 +61,8 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html {
-          redirect_to @order, notice: 'Order was successfully updated.'
-        }
+        format.html { redirect_to @order,
+          notice: 'Order was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

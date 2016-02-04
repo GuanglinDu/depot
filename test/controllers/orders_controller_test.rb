@@ -52,12 +52,13 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "should update order" do
     assert_not_nil @order.id, "Should not be nil"
-    assert assigns(:order), "Should be assigned"
 
     patch :update, id: @order, order: { address: @order.address,
                                         email: @order.email,
                                         name: @order.name,
                                         pay_type: @order.pay_type }
+
+    assert assigns(:order), "Should be assigned"
     assert_redirected_to order_path(@order)
   end
 
